@@ -8,5 +8,8 @@
   },
   "author": "Francois Laberge <francoislaberge@gmail.com>",
   "license": "MIT",
-  "repository": "https://github.com/jiborobot/debugger"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jiborobot/debugger"
+  }
 }
