@@ -5,17 +5,15 @@ Work in progress. We're be extracting the debugger logic we made for remote debu
 
 ### Usage
 
-  1. Install debugger
-
+ 1. Install debugger
 
         npm install -g debugger
 
-  2. To Debug A script
-
+ 2. To Debug A script
 
         debugger your-script.js
 
-  3. The Debugger App should now be open with devtools ready to go. **NOTE:** Right now it will set a breakpoint on the first line, there's a todo to make configure this with an command line argument
+ 3. The Debugger App should now be open with devtools ready to go. **NOTE:** Right now it will set a breakpoint on the first line, there's a todo to make configure this with an command line argument
 
 ### Todo
     - [ ] Don't set a break point on startup, instead make it --debug-brk an option
