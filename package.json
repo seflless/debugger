@@ -11,5 +11,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/jiborobot/debugger"
+  },
+  "bugs": {
+    "url": "https://github.com/jiborobot/debugger/issues"
   }
 }
