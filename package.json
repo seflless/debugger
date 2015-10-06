@@ -4,7 +4,11 @@
   "description": "Easily debug or just run apps in electron or node. Remote debugging also supported.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "./bin/postinstall.sh"
+  },
+  "bin": {
+    "debugger": "./bin/debugger.js"
   },
   "author": "Francois Laberge <francoislaberge@gmail.com>",
   "license": "MIT",
@@ -14,5 +18,10 @@
   },
   "bugs": {
     "url": "https://github.com/jiborobot/debugger/issues"
+  },
+  "dependencies": {
+    "electron-prebuilt": "^0.33.6",
+    "lodash": "^3.10.1",
+    "node-inspector": "^0.12.3"
   }
 }
