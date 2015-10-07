@@ -42,4 +42,4 @@ We're be extracting the debugger logic we made for remote debugging our robots i
 1. To make your global ```debugger``` command point to your local code. Run the following from the
 debugger source root folder:
 
-      ln -s -f $("pwd")/bin/debugger.js /usr/local/bin/debugger
+        ln -s -f $("pwd")/bin/debugger.js /usr/local/bin/debugger
