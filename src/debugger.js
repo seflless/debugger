@@ -1,7 +1,6 @@
-#!/usr/bin/env node
-
 var spawn = require('child_process').spawn,
     path = require('path'),
+    fs = require('fs'),
     electronPath = require('electron-prebuilt'),
     killProcess = require('../src/kill-process'),
     nodeInspector,
@@ -11,6 +10,13 @@ var spawn = require('child_process').spawn,
 if(process.argv.length<3){
     console.log("Error: Script argument is required.");
     process.exit(1);
+}
+
+// If it's just a request for the version number early out with the version number
+if(process.argv.length === 3 && process.argv[2] === '-v' ){
+    var version = require("../package.json").version;
+    console.log(version);
+    process.exit();
 }
 
 // Kill previous instance of node-inspector
@@ -43,6 +49,11 @@ killProcess("node-inspector", function(err) {
             //console.log(launchDebuggerWindowCommand);
             var electron = spawn('sh', ['-c', launchDebuggerWindowCommand]);
 
+            // Shutdown if the debugger app is closed
+            electron.on('exit', function(){
+                cleanup();
+            });
+
             electron.unref();
         }, 1000);
     });
@@ -64,16 +75,17 @@ function cleanup(){
         nodeInspector.kill(0);
         nodeInspector = null;
     }
-    /*if(node){
+    
+    if(node){
         node.kill(0);
         node = null;
-    }*/
+    }
+
     // Make sure the debugger process exits
     process.exit();
 }
     // The process exited for whatever reason
 process.on('exit', function() {
-    console.log('process.exit');
     cleanup();
 });
 /*

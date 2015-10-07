@@ -1,0 +1,17 @@
+### Todos
+We're be extracting the debugger logic we made for remote debugging our robots into a reusable module.
+
+  - Don't set a break point on startup, instead make it --debug-brk an option
+  - Support debugging electron apps
+  - Support remote debugging
+    - Of node apps
+    - Of Electron apps
+  - Add Windows/Linux support
+    - Add cross platform shortcuts for reload and dev tools toggle as in [electron-debug](https://www.npmjs.com/package/electron-debug)
+    - Make sure menu shows proper platform shortcut
+  - Checkout [Chrome DevTools App](https://kenneth.io/blog/2014/12/28/taking-chrome-devtools-outside-the-browser/) to make sure this project has a unique value proposition.
+  - Potentially add support for remote debugging over an ssh tunnel to make debugging an app on an arbitrary server easy
+  - Improve the postinstall script with better app branding:
+    - Make sure process names are branded, etc.
+    - OSX Specific (Look at other OSs too)
+      - http://electron.atom.io/docs/v0.33.0/tutorial/application-distribution/#os-x

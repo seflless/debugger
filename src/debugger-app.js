@@ -11,7 +11,7 @@ var debugUrl = process.argv[2];
 
 var template = [
     {
-        label: 'Electron',
+        label: 'Debugger',
         submenu: [
             {
                 label: 'Quit',
