@@ -32,6 +32,17 @@ killProcess("node-inspector", function(err) {
     // Launch node in debug mode
     node = spawn('node', ['--debug-brk'].concat(process.argv.slice(2)), { stdio: 'inherit' });
 
+    // If the node process finished then cleanup
+    node.on('exit',function(){
+        console.log('node.exit');
+        cleanup();
+    })
+
+    node.on('SIGHUP', function() {
+        console.log('node.sighup');
+        cleanup();
+    });
+
     // Kill existing electron instances that were fired off with our script
     killProcess("debugger-app", function(err) {
         if(err){
@@ -75,7 +86,7 @@ function cleanup(){
         nodeInspector.kill(0);
         nodeInspector = null;
     }
-    
+
     if(node){
         node.kill(0);
         node = null;
@@ -89,16 +100,7 @@ process.on('exit', function() {
     cleanup();
 });
 /*
-    // If the node process finished then cleanup
-node.on('exit',function(){
-    console.log('node.exit');
-    cleanup();
-})
 
-node.on('SIGHUP', function() {
-    console.log('node.sighup');
-    cleanup();
-});
 */
 /*
 ls.stdout.on('data', function (data) {
