@@ -16,7 +16,7 @@
     "url": "https://github.com/jiborobot/debugger"
   },
   "bugs": {
-    "url": "https://github.com/jiborobot/debugger/issues"
+    "url": "https://github.com/francoislaberge/debugger/issues"
   },
   "dependencies": {
     "electron-prebuilt": "0.33.6",

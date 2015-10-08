@@ -1,5 +1,4 @@
 ### Todos
-We're be extracting the debugger logic we made for remote debugging our robots into a reusable module.
 
   - Don't set a break point on startup, instead make it --debug-brk an option
   - Support debugging electron apps
@@ -15,3 +14,7 @@ We're be extracting the debugger logic we made for remote debugging our robots i
     - Make sure process names are branded, etc.
     - OSX Specific (Look at other OSs too)
       - http://electron.atom.io/docs/v0.33.0/tutorial/application-distribution/#os-x
+  - Think about supporting debugging regular websites
+    - local file (auto serve it up to make ajax type stuff work)
+    - by url
+    - can we add support for auto babelifying, coffeescripting etc?
