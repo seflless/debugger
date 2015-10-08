@@ -18,7 +18,7 @@ Features:
 
         debugger your-script.js
 
- 3. The Debugger App should now be open with devtools ready to go. **NOTE:** Right now it will set a breakpoint on the first line, there's a todo to make configure this with an command line argument
+ 3. The Debugger App should now be open with devtools ready to go. **NOTE:** Right now it will set a breakpoint on the first line, there's a todo to configure this with an command line argument
 
 ### Contributing
 
