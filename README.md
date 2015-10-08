@@ -29,7 +29,7 @@ debugger source root folder:
 
 
 ### Credits
-  - Special thanks to Camilo Aguilar ([c4milo](https://github.com/c4milo)/[@c4milo](https://twitter.com/c4milo)) for releasing the ```debugger``` module name for this projects usage
+  - Special thanks to Camilo Aguilar ([c4milo](https://github.com/c4milo)/[@c4milo](https://twitter.com/c4milo)) for releasing the ```debugger``` module name for this project's usage
   - [node-inspector](https://www.npmjs.com/package/node-inspector) for the heavy lifting in debugging
   - [electron](http://electron.atom.io/) for making desktop apps so easy to make
   - [electron-prebuilt](https://www.npmjs.com/package/electron-prebuilt) for making electron even easier to use in projects
