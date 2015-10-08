@@ -1,3 +1,3 @@
 setInterval(function(){
     console.log('hi');
-},1000);
+}, 1000);

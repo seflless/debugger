@@ -34,13 +34,11 @@ killProcess("node-inspector", function(err) {
 
     // If the node process finished then cleanup
     node.on('exit',function(){
-        console.log('node.exit');
-        cleanup();
+        cleanup('node exit');
     })
 
     node.on('SIGHUP', function() {
-        console.log('node.sighup');
-        cleanup();
+        cleanup('node SIGHUP');
     });
 
     // Kill existing electron instances that were fired off with our script
@@ -62,7 +60,7 @@ killProcess("node-inspector", function(err) {
 
             // Shutdown if the debugger app is closed
             electron.on('exit', function(){
-                cleanup();
+                cleanup('electron exit');
             });
 
             electron.unref();
@@ -75,20 +73,23 @@ killProcess("node-inspector", function(err) {
  */
     // User Control+Cs or equivalent
 process.on('SIGHUP', function() {
-    var fs = require('fs');
-    fs.writeFileSync('test.txt', "hi","utf8");
-    cleanup();
+    cleanup('main SIGHUP');
 });
+
+function saveReason(str){
+    fs.writeFileSync('reason.txt', str || "no reason given", "utf8");
+}
     // Function that does the work of cleaning up all of the processes the debugger
     // spawned
-function cleanup(){
+function cleanup(reason){
+    //saveReason(reason);
     if(nodeInspector){
-        nodeInspector.kill(0);
+        //nodeInspector.kill("SIGHUP");
         nodeInspector = null;
     }
 
     if(node){
-        node.kill(0);
+        //node.kill("SIGHUP");
         node = null;
     }
 
@@ -97,7 +98,7 @@ function cleanup(){
 }
     // The process exited for whatever reason
 process.on('exit', function() {
-    cleanup();
+    cleanup('main process.exit');
 });
 /*
 
