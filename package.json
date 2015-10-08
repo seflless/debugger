@@ -1,6 +1,6 @@
 {
   "name": "debugger",
-  "version": "0.6.5",
+  "version": "0.6.6",
   "description": "Easily Debug Node Apps",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
