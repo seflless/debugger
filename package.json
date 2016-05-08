@@ -1,7 +1,7 @@
 {
   "name": "debugger",
   "version": "0.33.6",
-  "description": "Easily Debug Node Apps",
+  "description": "Easily Debug Node/Electron Scripts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "node bin/postinstall.js"

@@ -1,5 +1,5 @@
 ### Overview
-Easy debugging of node.js scripts.
+Easily Debug Node/Electron Scripts.
 
 ### Usage
 
