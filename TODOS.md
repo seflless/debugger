@@ -18,3 +18,14 @@
     - local file (auto serve it up to make ajax type stuff work)
     - by url
     - can we add support for auto babelifying, coffeescripting etc?
+  - different debug modes
+    - Include suport for devices
+      - Experiment with what you can do with [raw access to the devtools page](https://github.com/atom/electron/issues/3221#issuecomment-151350686)
+      - Add lifesized support for true sized devices. Implement full on device wrapper visualization via transparent window trick.
+      - Debug a static web page on file:///*
+      - Debug a hosted web page http://host-or-ip
+    - Debug a remote web page
+    -
+    - Could we roll in UI automation or is that increasing the scope too much?
+    - Mocha and other test framework debugging
+  

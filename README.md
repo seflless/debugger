@@ -13,7 +13,6 @@ Easy debugging of node.js scripts.
 
  3. Press Command + R (OSX) or Control + R (Windows/Linux) to reload the script.
 
-
 ### Contributing
 
 1. To make your global ```debugger``` command point to your local code. Run the following from the
