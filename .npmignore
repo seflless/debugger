@@ -2,3 +2,4 @@ README.md
 bin/iconset.sh
 test.js
 resources/osx-app-icon.psd
+npm-debug.log

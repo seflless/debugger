@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <title>Debugger</title>
+</head>
+<body>
+    <script>
+        /**
+         * Ignore all this. This just includes the debugger target script
+         */
+        var ipc = require('ipc');
+            src = ipc.sendSync('get-target-script');
+        var script = document.createElement("script");
+        script.type = "text/javascript";
+        script.src = src;
+        document.body.appendChild(script);
+    </script>
+</body>
+</html>

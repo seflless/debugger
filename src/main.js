@@ -6,8 +6,9 @@ var fs = require("fs");
 var configPath = path.join(app.getDataPath(), "debugger-config.json");
 
 
-// The debug url is passed on the command line
-var debugUrl = process.argv[2];
+// The target script to debug is passed on the command line
+var targetScript = './' + process.argv[2];
+process.chdir(path.dirname(targetScript));
 
 var template = [
     {
@@ -26,12 +27,20 @@ var template = [
         label: 'View',
         submenu: [
             {
-                label: 'Reload',
-                accelerator: 'Command+R',
+                label: 'Reload Script',
+                accelerator: 'CommandOrControl+R',
                 click: function () {
                     if (mainWindow) {
                         mainWindow.reloadIgnoringCache();
                     }
+                }
+            },
+            {type: 'separator'},
+            {
+                label: 'Developer Tools',
+                accelerator: 'Alt+CommandOrControl+I',
+                click: function () {
+                    mainWindow.toggleDevTools();
                 }
             }
         ]
@@ -69,75 +78,27 @@ app.on('ready', function() {
     //set the context menu
     Menu.setApplicationMenu(Menu.buildFromTemplate(template));
 
-    var windowBounds = restoreWindowBounds();
-    // Create the browser window.
-    mainWindow = new BrowserWindow(windowBounds);
+    mainWindow = new BrowserWindow({});
+
+    mainWindow.hide();
 
     // and load the index.html of the app.
-    mainWindow.loadUrl(debugUrl);
+    var debuggerWebpage = 'file://' + path.resolve(__dirname, '../debugger.html');
+    mainWindow.loadUrl( debuggerWebpage );
+
+    mainWindow.webContents.toggleDevTools();
+
+    var ipc = require('ipc');
+    ipc.on('get-target-script', function(event, arg) {
+      event.returnValue = targetScript;
+    });
 
     // Emitted when the window is closed.
     mainWindow.on('closed', function() {
-        // Save the bounds of the BrowserWindow so it can be restored on the next
-        // run
-        saveWindowBounds(mainWindow);
 
         // Dereference the window object, usually you would store windows
         // in an array if your app supports multi windows, this is the time
         // when you should delete the corresponding element.
         mainWindow = null;
     });
-
-    // Ensure any time the window changes at all that we save it's bounds for
-    // restoration on next start
-        // Listening to every possible window event wasn't working as triggers
-        // http://electron.atom.io/docs/v0.32.0/api/browser-window/#event-39-resize-39
-        // So instead we just poll to see if the windows bounds have changed and save then
-    var previouslySavedBounds = {
-            x: mainWindow.getBounds().x,
-            y: mainWindow.getBounds().y,
-            width: mainWindow.getBounds().width,
-            height: mainWindow.getBounds().height
-        };
-    setInterval( function(){
-        if( previouslySavedBounds.x !== mainWindow.getBounds().x ||
-            previouslySavedBounds.y !== mainWindow.getBounds().y ||
-            previouslySavedBounds.width !== mainWindow.getBounds().width ||
-            previouslySavedBounds.height !== mainWindow.getBounds().height){
-            saveWindowBounds();
-
-            previouslySavedBounds = {
-                x: mainWindow.getBounds().x,
-                y: mainWindow.getBounds().y,
-                width: mainWindow.getBounds().width,
-                height: mainWindow.getBounds().height
-            }
-        }
-    }, 500);
 });
-
-function restoreWindowBounds(){
-    var data;
-    try {
-      data = JSON.parse(fs.readFileSync(configPath, 'utf8'));
-    }
-    catch(e) {
-    }
-
-    if( typeof data !== "undefined" &&
-        typeof data.bounds !== "undefined" ){
-        return data.bounds;
-    } else {
-        return {
-            width: 1024,
-            height: 768
-        };
-    }
-}
-
-function saveWindowBounds(){
-    var data = {
-      bounds: mainWindow.getBounds()
-    };
-    fs.writeFileSync(configPath, JSON.stringify(data));
-}
