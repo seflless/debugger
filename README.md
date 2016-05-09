@@ -24,3 +24,7 @@ debugger source root folder:
   - Special thanks to Camilo Aguilar ([c4milo](https://github.com/c4milo)/[@c4milo](https://twitter.com/c4milo)) for releasing the ```debugger``` module name for this project's usage
   - [electron](http://electron.atom.io/) for making desktop apps so easy to make
   - [electron-prebuilt](https://www.npmjs.com/package/electron-prebuilt) for making electron even easier to use in projects
+
+### todos
+  - Switch to using [commander](https://www.npmjs.com/package/commander) to get better command line instructions.
+  - Add support for a switch to show the browserwindow for people who want to test code that requires a DOM and browser APIs.
