@@ -1,5 +1,5 @@
 ### Overview
-Easily Debug Node/Electron Scripts.
+Easily Debug Node and Electron renderer process scripts.
 
 ### Usage
 
