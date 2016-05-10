@@ -25,7 +25,7 @@ debugger source root folder:
   - [electron](http://electron.atom.io/) for making desktop apps so easy to make
   - [electron-prebuilt](https://www.npmjs.com/package/electron-prebuilt) for making electron even easier to use in projects
 
-### todos
+### Todos
   - Switch to using [commander](https://www.npmjs.com/package/commander) to get better command line instructions.
   - Add support for a switch to show the browserwindow for people who want to test code that requires a DOM and browser APIs.
   - Add support for `-v` to output the electron, v8, and node versions as well.
