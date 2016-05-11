@@ -11,10 +11,15 @@
          */
         var ipc = require('ipc');
             src = ipc.sendSync('get-target-script');
-        var script = document.createElement("script");
-        script.type = "text/javascript";
-        script.src = src;
-        document.body.appendChild(script);
+
+        // We have to wrap the require in a scope to avoid issues like the following
+        // where when trying to assign to certain named variables when in the global
+        // scope it will be ignored because window.<variable-name> is read only.
+        // See 'crypto' issue for example:
+        // https://github.com/electron/electron/issues/2129
+        (function(){
+            require(src);
+        })();
     </script>
 </body>
 </html>

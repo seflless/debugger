@@ -7,7 +7,7 @@ var configPath = path.join(app.getDataPath(), "debugger-config.json");
 
 
 // The target script to debug is passed on the command line
-var targetScript = './' + process.argv[2];
+var targetScript = path.resolve(process.cwd(), process.argv[2]);
 process.chdir(path.dirname(targetScript));
 
 var template = [
