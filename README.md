@@ -7,9 +7,13 @@ Easily Debug Node and Electron renderer process scripts.
 
         npm install -g debugger
 
- 2. To debug a script
+ 2. To debug a script or electron renderer web page
 
         debugger your-script.js
+
+     or
+
+        debugger index.html
 
  3. Press Command + R (OSX) or Control + R (Windows/Linux) to reload the script.
 
