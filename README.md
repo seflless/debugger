@@ -9,7 +9,7 @@ Easily Debug Node and Electron renderer process scripts.
 
  2. To debug a script or electron renderer web page
 
-        debugger your-script.js
+        debugger script.js
 
      or
 
