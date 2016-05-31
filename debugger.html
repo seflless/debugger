@@ -9,8 +9,9 @@
         /**
          * Ignore all this. This just includes the debugger target script
          */
-        var ipc = require('ipc');
-            src = ipc.sendSync('get-target-script');
+
+        var ipcRenderer = require('electron').ipcRenderer;
+        var src = ipcRenderer.sendSync('get-target-script');
 
         // We have to wrap the require in a scope to avoid issues like the following
         // where when trying to assign to certain named variables when in the global

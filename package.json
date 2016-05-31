@@ -10,7 +10,7 @@
     "debugger": "./bin/debugger.js"
   },
   "dependencies": {
-    "electron-prebuilt": "0.33.6",
+    "electron-prebuilt": "1.0.2",
     "lodash": "3.10.1",
     "mkdirp": "^0.5.1"
   },

@@ -1,14 +1,17 @@
-var app = require('app');  // Module to control application life.
-var Menu = require("menu");
-var BrowserWindow = require('browser-window');  // Module to create native browser window.
+
+
+var electron = require('electron');
+var Menu = electron.Menu;//require("menu");
+var BrowserWindow = electron.BrowserWindow;  // Module to create native browser window.
+var app = electron.app;
 var path = require("path");
 var fs = require("fs");
-var configPath = path.join(app.getDataPath(), "debugger-config.json");
 
 
-// The target script to debug is passed on the command line
-var targetScript = path.resolve(process.cwd(), process.argv[2]);
-process.chdir(path.dirname(targetScript));
+
+// The target script or webpage to debug is passed on the command line
+var target = path.resolve(process.cwd(), process.argv[2]);
+process.chdir(path.dirname(target));
 
 var template = [
     {
@@ -78,20 +81,57 @@ app.on('ready', function() {
     //set the context menu
     Menu.setApplicationMenu(Menu.buildFromTemplate(template));
 
-    mainWindow = new BrowserWindow({});
-
-    mainWindow.hide();
-
-    // and load the index.html of the app.
-    var debuggerWebpage = 'file://' + path.resolve(__dirname, '../debugger.html');
-    mainWindow.loadUrl( debuggerWebpage );
-
-    mainWindow.webContents.toggleDevTools();
-
-    var ipc = require('ipc');
-    ipc.on('get-target-script', function(event, arg) {
-      event.returnValue = targetScript;
+    mainWindow = new BrowserWindow({
+        width: 1280,
+        height: 720
     });
+
+    // Check the target file's extension
+    var extension = path.extname(target);
+        // Load a webpage if it's an .html file
+    if( extension === '.html' ) {
+        console.log(target);
+        mainWindow.loadURL( 'file://' + target );
+    }
+        // Load the wrapping debugger page if it's a .js file
+    else if ( extension === '.js' ) {
+        console.log(target);
+        mainWindow.hide();
+
+        var debuggerWebpage = 'file://' + path.resolve(__dirname, '../debugger.html');
+        mainWindow.loadURL( debuggerWebpage );
+
+        var ipcMain = electron.ipcMain;
+        ipcMain.on('get-target-script', function(event, arg) {
+          event.returnValue = target;
+        });
+    }
+
+    mainWindow.webContents.openDevTools();
+    mainWindow.webContents.on('devtools-opened', function(){
+        mainWindow.focus();
+    });
+
+    // TODO: Explore this api more
+    // https://chromedevtools.github.io/debugger-protocol-viewer/1-1/Debugger/#method-setBreakpointByUrl
+    // https://github.com/electron/electron/blob/702352804239f58e5abcd0b96dbd748b68ab0278/spec/api-debugger-spec.js#L77
+    /*mainWindow.webContents.debugger.attach();
+    mainWindow.webContents.debugger.sendCommand(
+        'Debugger.setBreakpointByUrl', {
+            lineNumber: 0,
+            columnNumber: 0,
+            url: "/Users/francoislaberge/dev/debugger/examples/simple/app.js"
+        },
+        function (err, result){
+            console.log('hi');
+            if(err){
+                console.error(err);
+                return;
+            }
+            console.log(result);
+        });
+    */
+
 
     // Emitted when the window is closed.
     mainWindow.on('closed', function() {
