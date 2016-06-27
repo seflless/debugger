@@ -1,5 +1,6 @@
 ### Todos
 
+  - Evaluate [devtools](https://mattdesl.svbtle.com/debugging-nodejs-in-chrome-devtools) implementation, it's very well thought out.
   - Don't set a break point on startup, instead make it --debug-brk an option
   - Support debugging electron apps
   - Support remote debugging
