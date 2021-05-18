@@ -1,7 +1,7 @@
-var spawn = require('child_process').spawn,
-    path = require('path'),
-    fs = require('fs'),
-    electronPath = require('electron-prebuilt');
+const spawn = require('child_process').spawn,
+      path = require('path'),
+      fs = require('fs'),
+      electronPath = require('electron-prebuilt');
 
 // Validate args
 if(process.argv.length<3){
